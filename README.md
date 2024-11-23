@@ -2,6 +2,12 @@
 
 👻👻👻 簡単なFastAPIアプリケーションをECRにデプロイしてみる！  
 
+[![ci](https://github.com/osawa-koki/simple-fastapi-container-to-ecr/actions/workflows/ci.yml/badge.svg)](https://github.com/osawa-koki/simple-fastapi-container-to-ecr/actions/workflows/ci.yml)
+[![cd](https://github.com/osawa-koki/simple-fastapi-container-to-ecr/actions/workflows/cd.yml/badge.svg)](https://github.com/osawa-koki/simple-fastapi-container-to-ecr/actions/workflows/cd.yml)
+[![Dependabot Updates](https://github.com/osawa-koki/simple-fastapi-container-to-ecr/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/osawa-koki/simple-fastapi-container-to-ecr/actions/workflows/dependabot/dependabot-updates)
+
+![成果物](./fruit.gif)  
+
 ## ローカルでの開発
 
 DevContainerに入り、以下のコマンドを実行してください。  
@@ -41,6 +47,9 @@ GitHub Actionsでデプロイする場合には、以下のシークレットを
 | AWS_ACCESS_KEY_ID | AWSのアクセスキーID |
 | AWS_SECRET_ACCESS_KEY | AWSのシークレットアクセスキー |
 | AWS_REGION | AWSのリージョン |
+
+タグをプッシュすると、GitHub Actionsがデプロイを行います。  
+手動でトリガーすることも可能です。  
 
 ---
 
