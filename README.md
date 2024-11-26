@@ -11,6 +11,17 @@
 ## ローカルでの開発
 
 DevContainerに入り、以下のコマンドを実行してください。  
+※ `~/.aws/credentials`にAWSの認証情報が設定されていることを前提とします。  
+
+```shell
+cdk synth
+cdk bootstrap
+cdk deploy
+```
+
+このコマンドでECRリポジトリが作成されます。  
+
+FastAPIのローカル開発環境を構築する場合には、以下のコマンドを実行してください。  
 
 ```shell
 cd ./fastapi-app/
@@ -33,11 +44,11 @@ DevContainerに入り、以下のコマンドを実行してください。
 
 ```shell
 export ECR_REPOSITORY_URI=$(aws ecr describe-repositories --repository-names fastapi-app --query 'repositories[0].repositoryUri' --output text)
-aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+aws ecr get-login-password | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI}
 
 docker build -t fastapi-app ./fastapi-app/
-docker tag fastapi-app:latest $ECR_REPOSITORY_URI:latest
-docker push $ECR_REPOSITORY_URI:latest
+docker tag fastapi-app:latest ${ECR_REPOSITORY_URI}:latest
+docker push ${ECR_REPOSITORY_URI}:latest
 ```
 
 GitHub Actionsでデプロイする場合には、以下のシークレットを設定してください。  
@@ -57,7 +68,7 @@ GitHub Actionsでデプロイする場合には、以下のシークレットを
 
 ```shell
 export ECR_REPOSITORY_URI=$(aws ecr describe-repositories --repository-names fastapi-app --query 'repositories[0].repositoryUri' --output text)
-aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+aws ecr get-login-password | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI}
 
-docker run --rm -p 80:80 --name fastapi-app $ECR_REPOSITORY_URI:latest
+docker run --rm -p 80:80 --name fastapi-app ${ECR_REPOSITORY_URI}:latest
 ```
